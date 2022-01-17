@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/prefabs/Framework/AI/BTTask_MoveTo.cs.meta
+guid: 65e5e66f3d9fa8e4380df62980f1f5ae
+=======
+guid: f2c94b841f44c0f45a375dc33a965c1c
+>>>>>>> newBehaviorTree:Assets/MainMenu.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
