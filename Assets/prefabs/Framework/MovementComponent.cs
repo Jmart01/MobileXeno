@@ -15,6 +15,8 @@ public class MovementComponent : MonoBehaviour
     [SerializeField] float GroundCheckRadius = 0.1f;
     [SerializeField] LayerMask GroundLayerMask;
 
+    float SpeedMulti;
+
     Vector2 MoveInput;
     Vector3 Velocity;
     float Gravity = -9.8f;
@@ -89,17 +91,16 @@ public class MovementComponent : MonoBehaviour
         SnapShotPostionAndRotation();
     }
 
-    private void CaculateWalkingVelocity()
+    private void CaculateWalkingVelocity()//*
     {
         if (IsOnGround())
         {
             Velocity.y = -0.2f;
         }
 
-        Velocity.x = GetPlayerDesiredMoveDir().x * WalkingSpeed;
-        Velocity.z = GetPlayerDesiredMoveDir().z * WalkingSpeed;
+        Velocity.x = GetPlayerDesiredMoveDir().x * WalkingSpeed * SpeedMulti;
+        Velocity.z = GetPlayerDesiredMoveDir().z * WalkingSpeed * SpeedMulti;
         Velocity.y += Gravity * Time.deltaTime;
-
 
         Vector3 PosXTracePos = transform.position + new Vector3(EdgeCheckTracingDistance, 0.5f, 0f);
         Vector3 NegXTracePos = transform.position + new Vector3(-EdgeCheckTracingDistance, 0.5f, 0f);
@@ -119,6 +120,14 @@ public class MovementComponent : MonoBehaviour
         Velocity.x = Mathf.Clamp(Velocity.x, xMin, xMax);
         Velocity.z = Mathf.Clamp(Velocity.z, zMin, zMax);
     }
+
+    public void SetSpeedMulti(Vector2 data)
+    {
+        Vector2 zero = new Vector2(0, 0);
+        SpeedMulti = Vector2.Distance(zero, data)/100;
+        Debug.Log(SpeedMulti);
+    }
+
     public Vector3 GetPlayerDesiredMoveDir()
     {
         return new Vector3(-MoveInput.y, 0f, MoveInput.x).normalized;

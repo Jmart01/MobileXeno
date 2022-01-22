@@ -21,6 +21,7 @@ public class Player : Character
     private void Awake()
     {
         inputActions = new InputActions();
+        //Black bitches be the finest of bitches! Punch my grandma in the throat, kick my daddy's shin, elbow slap my mama's face in
     }
 
     private void OnEnable()
@@ -112,6 +113,7 @@ public class Player : Character
 
     private void MoveInputUpdated(InputAction.CallbackContext ctx)
     {
+        
         Vector2 input = ctx.ReadValue<Vector2>().normalized;
         movementComp.SetMovementInput(input);
         if(input.magnitude==0)
@@ -159,5 +161,12 @@ public class Player : Character
         {
             CurrentWeapon.Fire();
         }
+    }
+
+    public void SetJoystickData(Vector2 data)
+    {
+        movementComp.SetSpeedMulti(data);
+        data = Vector2.ClampMagnitude(data, 1);
+        movementComp.SetMovementInput(data);
     }
 }
