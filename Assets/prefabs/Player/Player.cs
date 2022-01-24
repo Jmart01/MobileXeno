@@ -13,6 +13,10 @@ public class Player : Character
     Coroutine BackToIdleCoroutine;
     InGameUI inGameUI;
 
+    [SerializeField] JoyStick moveStick;
+    [SerializeField] JoyStick aimStick;
+    CameraManager cameraManager;
+
     [SerializeField] Weapon[] StartWeaponPrefabs;
     [SerializeField] Transform GunSocket;
     List<Weapon> Weapons;
@@ -81,7 +85,7 @@ public class Player : Character
         inputActions.Gameplay.NextWeapon.performed += NextWeapon;
         animator.SetTrigger("BackToIdle");
         InitializeWeapons();
-
+        cameraManager = FindObjectOfType<CameraManager>();
 
     }
 
@@ -98,12 +102,22 @@ public class Player : Character
 
     private void MainActionReleased(InputAction.CallbackContext obj)
     {
+        StopFire();
+    }
+
+    private void Fire()
+    {
+        animator.SetLayerWeight(animator.GetLayerIndex("UpperBody"), 1);
+    }
+
+    private void StopFire()
+    {
         animator.SetLayerWeight(animator.GetLayerIndex("UpperBody"), 0);
     }
 
     private void MainActionButtonDown(InputAction.CallbackContext obj)
     {
-        animator.SetLayerWeight(animator.GetLayerIndex("UpperBody"), 1);
+        Fire();
     }
 
     private void CursorPosUpdated(InputAction.CallbackContext obj)
@@ -113,15 +127,21 @@ public class Player : Character
 
     private void MoveInputUpdated(InputAction.CallbackContext ctx)
     {
-        
+
         Vector2 input = ctx.ReadValue<Vector2>().normalized;
+        UpdateMovement(input);
+    }
+
+    private void UpdateMovement(Vector2 input)
+    {
         movementComp.SetMovementInput(input);
-        if(input.magnitude==0)
+        if (input.magnitude == 0)
         {
             BackToIdleCoroutine = StartCoroutine(DelayedBackToIdle());
-        }else
+        }
+        else
         {
-            if(BackToIdleCoroutine!=null)
+            if (BackToIdleCoroutine != null)
             {
                 StopCoroutine(BackToIdleCoroutine);
                 BackToIdleCoroutine = null;
@@ -153,8 +173,17 @@ public class Player : Character
     {
         base.Update();
         UpdateAnimation();
+        UpdateMovestickInput();
+        UpdateCamera();
+        UpdateAimStickInput();
     }
-    
+
+    private void UpdateCamera()
+    {
+
+        cameraManager.UpdateCamera(transform.position, moveStick.Input, aimStick.Input.magnitude > 0);
+    }
+
     public void FireTimePoint()
     {
         if(CurrentWeapon!=null)
@@ -163,10 +192,26 @@ public class Player : Character
         }
     }
 
-    public void SetJoystickData(Vector2 data)
+    public void UpdateMovestickInput()
     {
-        movementComp.SetSpeedMulti(data);
-        data = Vector2.ClampMagnitude(data, 1);
-        movementComp.SetMovementInput(data);
+        if(moveStick != null)
+        {
+            UpdateMovement(moveStick.Input);
+        }
+    }
+    public void UpdateAimStickInput()
+    {
+        if(aimStick != null)
+        {
+            movementComp.SetAimInput(aimStick.Input);
+            if(aimStick.Input.magnitude > 0)
+            {
+                Fire();
+            }else
+            {
+                StopFire();
+            }
+
+        }
     }
 }

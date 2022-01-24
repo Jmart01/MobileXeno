@@ -15,9 +15,9 @@ public class MovementComponent : MonoBehaviour
     [SerializeField] float GroundCheckRadius = 0.1f;
     [SerializeField] LayerMask GroundLayerMask;
 
-    float SpeedMulti;
 
     Vector2 MoveInput;
+    Vector2 AimInput;
     Vector3 Velocity;
     float Gravity = -9.8f;
     CharacterController characterController;
@@ -38,6 +38,11 @@ public class MovementComponent : MonoBehaviour
     public void SetCursorPos(Vector2 cursorPos)
     {
         CursorPos = cursorPos;
+    }
+
+    public void SetAimInput(Vector2 input)
+    {
+        AimInput = input;
     }
 
     Vector3 GetCursorDir()
@@ -91,15 +96,14 @@ public class MovementComponent : MonoBehaviour
         SnapShotPostionAndRotation();
     }
 
-    private void CaculateWalkingVelocity()//*
+    private void CaculateWalkingVelocity()
     {
         if (IsOnGround())
         {
             Velocity.y = -0.2f;
         }
 
-        Velocity.x = GetPlayerDesiredMoveDir().x * WalkingSpeed * SpeedMulti;
-        Velocity.z = GetPlayerDesiredMoveDir().z * WalkingSpeed * SpeedMulti;
+        Velocity = GetPlayerDesiredMoveDir() * WalkingSpeed;
         Velocity.y += Gravity * Time.deltaTime;
 
         Vector3 PosXTracePos = transform.position + new Vector3(EdgeCheckTracingDistance, 0.5f, 0f);
@@ -121,23 +125,29 @@ public class MovementComponent : MonoBehaviour
         Velocity.z = Mathf.Clamp(Velocity.z, zMin, zMax);
     }
 
-    public void SetSpeedMulti(Vector2 data)
-    {
-        Vector2 zero = new Vector2(0, 0);
-        SpeedMulti = Vector2.Distance(zero, data)/100;
-        Debug.Log(SpeedMulti);
-    }
-
     public Vector3 GetPlayerDesiredMoveDir()
     {
-        return new Vector3(-MoveInput.y, 0f, MoveInput.x).normalized;
+        return InputAxisToWorldDir(MoveInput);
+    }
+
+
+    private Vector3 InputAxisToWorldDir(Vector2 input)
+    {
+        //base on the camera's right
+        Vector3 CameraRight = Camera.main.transform.right;//?
+
+        //you need to use cross product to find the frame up
+        Vector3 FrameUp = Vector3.Cross(CameraRight, transform.up);
+
+
+        return CameraRight * input.x + FrameUp * input.y;
     }
 
     public Vector3 GetPlayerDesiredLookDir()
     {
-        if (LookAtCursor)
+        if (AimInput.magnitude > 0)
         {
-            return GetCursorDir();
+            return InputAxisToWorldDir(AimInput);
         } else
         {
             return GetPlayerDesiredMoveDir();
