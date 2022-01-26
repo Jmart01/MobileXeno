@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] ParticleSystem BulletEmitter;
     [SerializeField] float DamagePerBullet = 1;
     [SerializeField] Sprite WeaponIcon;
+    [SerializeField] float ShootingSpeed = 1.0f;
 
     public Sprite GetWeaponIcon() { return WeaponIcon; }
     public float GetDamagePerBullet() { return DamagePerBullet; }
@@ -28,6 +29,11 @@ public class Weapon : MonoBehaviour
     public void Equip()
     {
         gameObject.SetActive(true);        
+    }
+
+    public float GetShootingSpeed()
+    {
+        return ShootingSpeed;
     }
 
     public void UnEquip()

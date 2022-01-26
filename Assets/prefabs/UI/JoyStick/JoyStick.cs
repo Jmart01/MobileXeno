@@ -9,6 +9,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 {
     [SerializeField] RectTransform Handle;
     [SerializeField] RectTransform Background;
+    [SerializeField] RectTransform Pivot;
 
     public Vector2 Input
     {
@@ -32,13 +33,14 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        
+        Pivot.position = eventData.position;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         Debug.Log("Pointer up");
         Handle.position = Background.position;
+        Pivot.localPosition = Vector2.zero;
         Input = Vector2.zero;
     }
 

@@ -22,6 +22,7 @@ public class Player : Character
     List<Weapon> Weapons;
     Weapon CurrentWeapon;
     int currentWeaponIndex = 0;
+    bool PlayerAlive = true;
     private void Awake()
     {
         inputActions = new InputActions();
@@ -37,6 +38,12 @@ public class Player : Character
     {
         inputActions.Disable();
     }
+
+    public void DisableInputs()
+    {
+        OnDisable();
+    }
+
     void InitializeWeapons()
     {
         Weapons = new List<Weapon>();
@@ -66,6 +73,7 @@ public class Player : Character
             {
                 inGameUI.SwichedWeaponTo(CurrentWeapon);
             }
+            animator.SetFloat("FiringSpeed", CurrentWeapon.GetShootingSpeed());
         }
     }
 
@@ -113,6 +121,7 @@ public class Player : Character
     private void Fire()
     {
         animator.SetLayerWeight(animator.GetLayerIndex("UpperBody"), 1);
+        
     }
 
     private void StopFire()
@@ -177,10 +186,13 @@ public class Player : Character
     new void Update()
     {
         base.Update();
-        UpdateAnimation();
-        UpdateMovestickInput();
-        UpdateCamera();
-        UpdateAimStickInput();
+        if(PlayerAlive == true)
+        {
+            UpdateAnimation();
+            UpdateMovestickInput();
+            UpdateCamera();
+            UpdateAimStickInput();
+        }
     }
 
     private void UpdateCamera()
@@ -199,24 +211,36 @@ public class Player : Character
 
     public void UpdateMovestickInput()
     {
-        if(moveStick != null)
+        if(PlayerAlive == true)
         {
-            UpdateMovement(moveStick.Input);
+            if (moveStick != null)
+            {
+                UpdateMovement(moveStick.Input);
+            }
         }
     }
     public void UpdateAimStickInput()
     {
-        if(aimStick != null)
+        if(PlayerAlive == true)
         {
-            movementComp.SetAimInput(aimStick.Input);
-            if(aimStick.Input.magnitude > 0)
+            if (aimStick != null)
             {
-                Fire();
-            }else
-            {
-                StopFire();
+                movementComp.SetAimInput(aimStick.Input);
+                if (aimStick.Input.magnitude > 0)
+                {
+                    Fire();
+                }
+                else
+                {
+                    StopFire();
+                }
             }
-
         }
+    }
+    public override void NoHealthLeft()
+    {
+        base.NoHealthLeft();
+        PlayerAlive = false;
+        OnDisable();
     }
 }

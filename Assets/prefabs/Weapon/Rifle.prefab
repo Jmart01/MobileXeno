@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: WeaponIcon
       value: 
       objectReference: {fileID: 21300000, guid: 424d32d15b6e9184c970a0ca80600dac, type: 3}
+    - target: {fileID: -4503590311711321987, guid: cdb2fbd235f8fa74fb6df3ca4afaaea2, type: 3}
+      propertyPath: ShootingSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 176000177203051137, guid: cdb2fbd235f8fa74fb6df3ca4afaaea2, type: 3}
       propertyPath: m_RootOrder
       value: 2
