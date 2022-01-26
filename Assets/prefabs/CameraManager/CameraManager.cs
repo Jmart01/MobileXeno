@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour
     private Camera MainCamera;
     [SerializeField] [Range(0,1)]float RotateDamping = 0.5f;
     [SerializeField] [Range(0,1)]float MoveDamping = 0.5f;
+    [SerializeField] float MoveSpeed = 20f;
 
 
 
@@ -29,11 +30,9 @@ public class CameraManager : MonoBehaviour
 
 
         //use lerping instead of a hard set to achieve damping
-        MainCamera.transform.position = cameraFollowTrans.position;
-        MainCamera.transform.rotation = cameraFollowTrans.rotation;
-        //Vector3 OriginalPosition = MainCamera.transform.position;
-        //Quaternion OriginalRotation = MainCamera.transform.rotation;
 
+        MainCamera.transform.position = Vector3.Lerp(MainCamera.transform.position, cameraFollowTrans.position, (1-MoveDamping)*MoveSpeed*Time.deltaTime);
+        MainCamera.transform.rotation = Quaternion.Lerp(MainCamera.transform.rotation, cameraFollowTrans.rotation, (1-RotateDamping) * RotateSpeed*Time.deltaTime);
 
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
@@ -31,7 +32,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Pointer Down");
+        
     }
 
     public void OnPointerUp(PointerEventData eventData)

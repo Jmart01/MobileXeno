@@ -91,6 +91,11 @@ public class Player : Character
 
     private void NextWeapon(InputAction.CallbackContext obj)
     {
+        SwapWeapon();
+    }
+
+    public void SwapWeapon()
+    {
         currentWeaponIndex = (currentWeaponIndex + 1) % Weapons.Count;
         EquipWeapon(currentWeaponIndex);
     }
