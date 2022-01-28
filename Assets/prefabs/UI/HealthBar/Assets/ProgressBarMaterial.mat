@@ -30,7 +30,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BarThickness: 0.871
-    - _Progress: 1
+    - _Progress: 0
     - _Thickness: 0.5
     m_Colors:
     - _BarTint: {r: 0.3443396, g: 1, b: 0.5192382, a: 1}

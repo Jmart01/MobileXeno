@@ -101,4 +101,9 @@ public class AIController : MonoBehaviour
         }
         
     }
+
+    public GameObject SetTarget()
+    {
+        return Target;
+    }
 }
