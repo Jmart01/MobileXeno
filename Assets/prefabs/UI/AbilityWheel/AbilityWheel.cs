@@ -19,8 +19,8 @@ public class AbilityWheel : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
 
         foreach(var widget in abilityWidgets)
         {
-            Vector3 widgetDir = widget.transform.right;
-            Vector2 widgetDir2D = new Vector2(-widgetDir.x, widgetDir.y);
+            Vector3 widgetDir = -widget.transform.right;
+            Vector2 widgetDir2D = new Vector2(widgetDir.x, widgetDir.y);
 
             float angle = Vector2.Angle(DragDir, widgetDir2D);
             if(angle < closestAngle)
