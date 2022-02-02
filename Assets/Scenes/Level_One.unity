@@ -41414,6 +41414,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombieRanged
       objectReference: {fileID: 0}
+    - target: {fileID: 8073302731100484405, guid: dd0ebfc2a74db4e4fbe3f78cc4826666, type: 3}
+      propertyPath: SightRaidus
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8073302731100484405, guid: dd0ebfc2a74db4e4fbe3f78cc4826666, type: 3}
+      propertyPath: AlwaysAwareDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8073302731100484405, guid: dd0ebfc2a74db4e4fbe3f78cc4826666, type: 3}
+      propertyPath: PeripheralVisionAngleDegrees
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd0ebfc2a74db4e4fbe3f78cc4826666, type: 3}
 --- !u!4 &1356877046 stripped
@@ -66442,6 +66454,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a99c74807a976054b9f529732531e738, type: 3}
+--- !u!1 &5077217039814662166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7762355958398206387, guid: a99c74807a976054b9f529732531e738, type: 3}
+  m_PrefabInstance: {fileID: 5077217039814662165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5077217039814662167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5077217039814662166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac69f3698a54b5469e9749e7f09bd28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7465566872925652430
 PrefabInstance:
   m_ObjectHideFlags: 0

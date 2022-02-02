@@ -42,6 +42,7 @@ public class AbilityWidget : MonoBehaviour
         if(isHighLighted)
         {
             GoalScale = new Vector3(1, 1, 1) * HighLighetedScale;
+            GetComponent<Ability>().ActivateAbility();
         }
         else
         {

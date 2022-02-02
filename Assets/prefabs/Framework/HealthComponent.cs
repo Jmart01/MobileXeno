@@ -13,6 +13,16 @@ public class HealthComponent : MonoBehaviour
     public OnHealthChanged onHealthChanged;
     public OnNoHealthLeft noHealthLeft;
 
+    public int GetHitpoints()
+    {
+        return HitPoints;
+    }
+
+    public int GetMaxHitpoints()
+    {
+        return MaxHitPoints;
+    }
+
     public void TakeDamage(int damage, GameObject DamageCauser)
     {
         int oldValue = HitPoints;
