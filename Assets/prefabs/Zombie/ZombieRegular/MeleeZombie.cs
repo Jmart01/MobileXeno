@@ -15,7 +15,7 @@ public class MeleeZombie : Zombie
             Player targetAsPlayer = target.GetComponent<Player>();
             if (targetAsPlayer)
             {
-                target.GetComponent<HealthComponent>().TakeDamage(1, gameObject);
+                target.GetComponent<HealthComponent>().ChangeHealth(-1, gameObject);
             }
         }
     }

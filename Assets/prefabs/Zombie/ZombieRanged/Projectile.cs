@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
     {
         if(other.gameObject == player)
         {
-            player.GetComponent<HealthComponent>().TakeDamage(directDmg, gameObject);
+            player.GetComponent<HealthComponent>().ChangeHealth(-directDmg, gameObject);
             Debug.Log($"Should get destroyed, did {directDmg}");
             Debug.Log(other.gameObject.name);
             Destroy(gameObject);
@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
         float DistanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         if(DistanceToPlayer < blastRadius)
         {
-            player.GetComponent<HealthComponent>().TakeDamage(indirectDmg, gameObject);
+            player.GetComponent<HealthComponent>().ChangeHealth(-indirectDmg, gameObject);
             //there is a null exception error, this is because when the player dies it is still trying to find the player and shoot them.
             Debug.Log($"Should get destroyed, did {indirectDmg}");
             Destroy(gameObject);

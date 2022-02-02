@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void HealthChanged(int newValue, int oldValue, int maxValue, GameObject Caluse)
+    public virtual void HealthChanged(float newValue, float oldValue, float maxValue, GameObject Cause)
     {
         
     }

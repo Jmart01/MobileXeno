@@ -23,10 +23,23 @@ public class Player : Character
     Weapon CurrentWeapon;
     int currentWeaponIndex = 0;
     bool PlayerAlive = true;
+
+    AbilityComponent abilityComp;
+
     private void Awake()
     {
         inputActions = new InputActions();
-        //Black bitches be the finest of bitches! Punch my grandma in the throat, kick my daddy's shin, elbow slap my mama's face in
+        abilityComp = GetComponent<AbilityComponent>();
+        if(abilityComp != null)
+        {
+            abilityComp.onNewAbilityInitialized += NewAbilityAdded;
+        }
+    }
+
+    private void NewAbilityAdded(AbilityBase newAbility)
+    {
+        AbilityWheel abilityWheel = FindObjectOfType<AbilityWheel>();
+        abilityWheel.AddNewAbility(newAbility);
     }
 
     private void OnEnable()
