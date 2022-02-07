@@ -346,6 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 7696764534912209401}
   icon: {fileID: 9170867707330245490}
+  Cooldown: {fileID: 1930212899889232432}
   ExpandedScale: 2
   HighLighetedScale: 2.2
   ScaleSpeed: 20

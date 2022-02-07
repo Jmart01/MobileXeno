@@ -9,6 +9,12 @@ public abstract class AbilityBase : ScriptableObject
     [SerializeField] Sprite Icon;
     [SerializeField] int AbilityLevel = 1;
 
+    public float CooldownPercent
+    {
+        get;
+        private set;
+    }
+
     public AbilityComponent ownerComp
     {
         get;
@@ -30,6 +36,7 @@ public abstract class AbilityBase : ScriptableObject
     {
         ownerComp = ownerAbilityComp;
         IsOnCooldown = false;
+        CooldownPercent = 1f;
     }
 
     bool CanCast()
@@ -53,13 +60,29 @@ public abstract class AbilityBase : ScriptableObject
     private void StartCooldown()
     {
         ownerComp.StartCoroutine(CooldownCoroutine());
+        ownerComp.StartCoroutine(SetMaterialCooldownTime());
     }
 
     private IEnumerator CooldownCoroutine()
-    {
+    {   
         IsOnCooldown = true;
         yield return new WaitForSeconds(CooldownTime);
         IsOnCooldown = false;
+        yield return null;
+    }
+
+    private IEnumerator SetMaterialCooldownTime()
+    {
+        float timer = 0f;
+        while(timer < CooldownTime)
+        {
+            timer = timer + Time.deltaTime;
+            CooldownPercent = Mathf.Clamp(1-(timer / CooldownTime),0,1);
+
+            //Debug.Log(CooldownPercent);
+            yield return new WaitForEndOfFrame();
+        }
+        CooldownPercent = 1;
         yield return null;
     }
 

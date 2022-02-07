@@ -24,6 +24,13 @@ public class MovementComponent : MonoBehaviour
     bool LookAtCursor = true;
     Vector2 CursorPos;
 
+    private float SpeedMultiplier = 1f;
+
+    public float SetSpeedMulti(float newVal)
+    {
+        return SpeedMultiplier = newVal; 
+    }
+
     #region Floor Follow
     Transform currentFloor;
     Vector3 PreviousWorldPos;
@@ -103,7 +110,7 @@ public class MovementComponent : MonoBehaviour
             Velocity.y = -0.2f;
         }
 
-        Velocity = GetPlayerDesiredMoveDir() * WalkingSpeed;
+        Velocity = GetPlayerDesiredMoveDir() * WalkingSpeed* SpeedMultiplier;
         Velocity.y += Gravity * Time.deltaTime;
 
         Vector3 PosXTracePos = transform.position + new Vector3(EdgeCheckTracingDistance, 0.5f, 0f);
@@ -192,7 +199,7 @@ public class MovementComponent : MonoBehaviour
         {
             if (IsOnGround())
             {
-                Velocity = GetPlayerDesiredMoveDir() * WalkingSpeed;
+                Velocity = GetPlayerDesiredMoveDir() * WalkingSpeed * SpeedMultiplier;
             }
             Velocity.y = -WalkingSpeed;
         }

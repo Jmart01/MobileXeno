@@ -15,7 +15,7 @@ public class AbilityWidget : MonoBehaviour
     [SerializeField] float HighLighetedScale = 2.2f;
     [SerializeField] float ScaleSpeed = 20f;
 
-    Vector3 GoalScale;
+    Vector3 GoalScale = new Vector3(1, 1, 1);
 
     AbilityBase ability;
 
@@ -31,6 +31,11 @@ public class AbilityWidget : MonoBehaviour
     void Update()
     {
         background.localScale = Vector3.Lerp(background.localScale,GoalScale,ScaleSpeed * Time.deltaTime);
+        if(ability != null)
+        {
+            //Debug.Log(ability.CooldownPercent);
+            SetCooldownProgress(ability.CooldownPercent);
+        }
     }
 
     void SetCooldownProgress(float progress)
@@ -46,7 +51,7 @@ public class AbilityWidget : MonoBehaviour
             GoalScale = new Vector3(1, 1, 1) * ExpandedScale;
         }else
         {
-            if(IsHighlighted())
+            if(IsHighlighted() && ability != null)
             {
                 ability.ActivateAbility();
             }

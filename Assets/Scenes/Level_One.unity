@@ -2104,7 +2104,7 @@ PrefabInstance:
       objectReference: {fileID: 1226284173}
     - target: {fileID: 8724726751897151954, guid: 1b2861de6cf6b9f4a8c833f0fbdd505d, type: 3}
       propertyPath: StaminaLevel
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8724726751897151954, guid: 1b2861de6cf6b9f4a8c833f0fbdd505d, type: 3}
       propertyPath: MaxStaminaLevel
@@ -2112,12 +2112,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8724726751897151954, guid: 1b2861de6cf6b9f4a8c833f0fbdd505d, type: 3}
       propertyPath: abilities.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8724726751897151954, guid: 1b2861de6cf6b9f4a8c833f0fbdd505d, type: 3}
       propertyPath: abilities.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 90bdc88c57d37a949a0ef19580114626, type: 2}
+    - target: {fileID: 8724726751897151954, guid: 1b2861de6cf6b9f4a8c833f0fbdd505d, type: 3}
+      propertyPath: abilities.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 69a54ecf277320a479a55ccfb0532c9f, type: 2}
     - target: {fileID: 9172106161509974845, guid: 1b2861de6cf6b9f4a8c833f0fbdd505d, type: 3}
       propertyPath: m_RootOrder
       value: 3
