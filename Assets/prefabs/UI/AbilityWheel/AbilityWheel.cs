@@ -43,6 +43,29 @@ public class AbilityWheel : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
         }
     }
 
+    internal void UpdateStamina(float newValue)
+    {
+        //loops throught the array of widgets
+        for(int i = 0; i < abilityWidgets.Length; i++)
+        {
+            //checks  if newvalue if greater than 1
+            if (newValue > 1)
+            {
+                //subtracts 1 from new value and sets it as the remainder
+                newValue -= 1;
+                //sets the stamina progress to 1 on the material
+                abilityWidgets[i].SetStaminaProgress(1);
+            }else if(newValue > 0)
+            {
+                
+                abilityWidgets[i].SetStaminaProgress(newValue);
+                newValue = 0;
+                break;
+            }
+        }
+        
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         foreach(AbilityWidget widget in abilityWidgets)

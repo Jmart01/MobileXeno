@@ -25,15 +25,23 @@ public class Player : Character
     bool PlayerAlive = true;
 
     AbilityComponent abilityComp;
+    AbilityWheel abilityWheel;
 
     private void Awake()
     {
         inputActions = new InputActions();
         abilityComp = GetComponent<AbilityComponent>();
+        abilityWheel = FindObjectOfType<AbilityWheel>();
         if(abilityComp != null)
         {
             abilityComp.onNewAbilityInitialized += NewAbilityAdded;
+            abilityComp.onStaminaUpdated += StaminaUpdated;
         }
+    }
+
+    private void StaminaUpdated(float newValue)
+    {
+        abilityWheel.UpdateStamina(newValue);
     }
 
     private void NewAbilityAdded(AbilityBase newAbility)
@@ -107,7 +115,6 @@ public class Player : Character
         animator.SetTrigger("BackToIdle");
         InitializeWeapons();
         cameraManager = FindObjectOfType<CameraManager>();
-
     }
 
     private void NextWeapon(InputAction.CallbackContext obj)
@@ -250,7 +257,7 @@ public class Player : Character
             }
         }
     }
-    public override void NoHealthLeft()
+    public override void NoHealthLeft(GameObject killer)
     {
         base.NoHealthLeft();
         PlayerAlive = false;

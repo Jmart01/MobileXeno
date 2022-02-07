@@ -10,6 +10,8 @@ public class Zombie : Character
     Rigidbody ZombieRigidbody;
     float speed;
     Vector3 previousLocation;
+
+    [SerializeField] float StaminaReward = 0.5f;
     
 
     // Start is called before the first frame update
@@ -45,13 +47,21 @@ public class Zombie : Character
         animator.SetFloat("Speed", speed);
     }
 
-    public override void NoHealthLeft()
+    public override void NoHealthLeft(GameObject killer)
     {
         base.NoHealthLeft();
         AIController AIC = GetComponent<AIController>();
         if(AIC != null)
         {
             AIC.StopAIBehavior();
+        }
+        if(killer != null)
+        {
+            AbilityComponent abilityComp = killer.GetComponent<AbilityComponent>();
+            if(abilityComp)
+            {
+                abilityComp.ChangeStamina(StaminaReward);
+            }
         }
     }
 }

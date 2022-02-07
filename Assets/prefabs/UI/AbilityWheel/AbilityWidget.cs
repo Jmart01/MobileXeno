@@ -20,11 +20,16 @@ public class AbilityWidget : MonoBehaviour
     AbilityBase ability;
 
     Material CooldownMat;
+    Material StaminaMat;
+
     // Start is called before the first frame update
     void Start()
     {
         CooldownMat = Instantiate(Cooldown.GetComponent<Image>().material);
         Cooldown.GetComponent<Image>().material = CooldownMat;
+
+        StaminaMat = Instantiate(background.GetComponent<Image>().material);
+        background.GetComponent<Image>().material = StaminaMat;
     }
 
     // Update is called once per frame
@@ -36,6 +41,11 @@ public class AbilityWidget : MonoBehaviour
             //Debug.Log(ability.CooldownPercent);
             SetCooldownProgress(ability.CooldownPercent);
         }
+    }
+
+    public void SetStaminaProgress(float progress)
+    {
+        StaminaMat.SetFloat("_Progress", progress);
     }
 
     void SetCooldownProgress(float progress)

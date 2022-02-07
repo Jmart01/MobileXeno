@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
         healthComp.noHealthLeft += NoHealthLeft;
     }
 
-    public virtual void NoHealthLeft()
+    public virtual void NoHealthLeft(GameObject killer = null)
     {
         //play DeathAnimation
         

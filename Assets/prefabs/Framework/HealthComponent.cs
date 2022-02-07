@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public delegate void OnHealthChanged(float newValue, float oldValue, float maxValue, GameObject Causer);
-public delegate void OnNoHealthLeft();
+public delegate void OnNoHealthLeft(GameObject killer);
 
 public class HealthComponent : MonoBehaviour
 {
@@ -15,6 +15,10 @@ public class HealthComponent : MonoBehaviour
 
     public void ChangeHealth(float changeAmount, GameObject Causer = null)
     {
+        if(changeAmount < 0 && HitPoints == 0)
+        {
+            return;
+        }
         float oldValue = HitPoints;
         HitPoints += changeAmount;
         HitPoints = Mathf.Clamp(HitPoints, 0f, MaxHitPoints);
@@ -22,7 +26,7 @@ public class HealthComponent : MonoBehaviour
         {
             if(noHealthLeft!=null)
             {
-                noHealthLeft.Invoke();
+                noHealthLeft.Invoke(Causer);
             }
         }
         if (onHealthChanged != null)
