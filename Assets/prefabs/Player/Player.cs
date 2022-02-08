@@ -26,11 +26,13 @@ public class Player : Character
 
     AbilityComponent abilityComp;
     AbilityWheel abilityWheel;
+    CreditSystem creditSystem;
 
     private void Awake()
     {
         inputActions = new InputActions();
         abilityComp = GetComponent<AbilityComponent>();
+        creditSystem = GetComponent<CreditSystem>();
         abilityWheel = FindObjectOfType<AbilityWheel>();
         if(abilityComp != null)
         {
@@ -115,6 +117,8 @@ public class Player : Character
         animator.SetTrigger("BackToIdle");
         InitializeWeapons();
         cameraManager = FindObjectOfType<CameraManager>();
+
+        abilityWheel.UpdateStamina(abilityComp.GetStaminaLevel());
     }
 
     private void NextWeapon(InputAction.CallbackContext obj)

@@ -10,6 +10,7 @@ public class InGameUI : MonoBehaviour
     [SerializeField] GameObject PauseMenu;
     [SerializeField] Image WeaponIcon;
     [SerializeField] Image ProgressBar;
+    [SerializeField] Text CreditAmtText;
     public void SetPlayerHealth(float percent)
     {
         ProgressBar.material.SetFloat("_Progress", percent);
@@ -18,6 +19,11 @@ public class InGameUI : MonoBehaviour
     {
         InGameMenu.SetActive(true);
         PauseMenu.SetActive(false);
+    }
+
+    public void SetPlayerCreditAmt(float newValue)
+    {
+        CreditAmtText.text = newValue.ToString();
     }
 
     public void SWitchToPauseMenu()
@@ -33,6 +39,15 @@ public class InGameUI : MonoBehaviour
         HealthComponent PlayerHealthComp = FindObjectOfType<Player>().GetComponent<HealthComponent>();
         PlayerHealthComp.onHealthChanged += PlayerHealthChanged;
         PlayerHealthComp.BroadCastCurrentHealth();
+
+        CreditSystem playerCreditSystem = FindObjectOfType<Player>().GetComponent<CreditSystem>();
+        playerCreditSystem.onCreditChanged += PlayerCreditChanged;
+        playerCreditSystem.BroadCastCreditAmount();
+    }
+
+    private void PlayerCreditChanged(float newValue, float oldValue)
+    {
+        SetPlayerCreditAmt(newValue);
     }
 
     private void PlayerHealthChanged(float newValue, float oldValue, float maxValue, GameObject Causer)

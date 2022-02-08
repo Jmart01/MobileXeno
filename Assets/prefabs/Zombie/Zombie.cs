@@ -12,6 +12,7 @@ public class Zombie : Character
     Vector3 previousLocation;
 
     [SerializeField] float StaminaReward = 0.5f;
+    [SerializeField] float CreditReward = 10f;
     
 
     // Start is called before the first frame update
@@ -58,9 +59,11 @@ public class Zombie : Character
         if(killer != null)
         {
             AbilityComponent abilityComp = killer.GetComponent<AbilityComponent>();
-            if(abilityComp)
+            CreditSystem creditSystem = killer.GetComponent<CreditSystem>();
+            if(abilityComp && creditSystem)
             {
                 abilityComp.ChangeStamina(StaminaReward);
+                creditSystem.ChangeCredit(CreditReward);
             }
         }
     }

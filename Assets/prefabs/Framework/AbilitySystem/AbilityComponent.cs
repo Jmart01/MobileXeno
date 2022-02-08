@@ -56,7 +56,7 @@ public class AbilityComponent : MonoBehaviour
         while(StaminaLevel > 0)
         {
             StaminaLevel -= StaminaDropSpeed * Time.deltaTime;
-            onStaminaUpdated.Invoke(StaminaLevel);
+            onStaminaUpdated?.Invoke(StaminaLevel);
             yield return new WaitForEndOfFrame();
         }
         StaminaLevel = Mathf.Clamp(StaminaLevel, MaxStaminaLevel, StaminaLevel);
