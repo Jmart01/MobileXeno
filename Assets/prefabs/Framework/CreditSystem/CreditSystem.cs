@@ -9,6 +9,11 @@ public class CreditSystem : MonoBehaviour
 
     public OnCreditAmountChanged onCreditChanged;
 
+    public float GetCurrentCredit()
+    {
+        return currentCredit;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

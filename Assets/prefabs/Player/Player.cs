@@ -19,7 +19,7 @@ public class Player : Character
 
     [SerializeField] Weapon[] StartWeaponPrefabs;
     [SerializeField] Transform GunSocket;
-    List<Weapon> Weapons;
+    List<Weapon> Weapons = new List<Weapon>();
     Weapon CurrentWeapon;
     int currentWeaponIndex = 0;
     bool PlayerAlive = true;
@@ -38,6 +38,18 @@ public class Player : Character
         {
             abilityComp.onNewAbilityInitialized += NewAbilityAdded;
             abilityComp.onStaminaUpdated += StaminaUpdated;
+        }
+    }
+
+    internal void AquireNewWeapon(Weapon weapon, bool Equip = false)
+    {
+        Weapon newWeapon = Instantiate(weapon, GunSocket);
+        newWeapon.Owner = gameObject;
+        newWeapon.UnEquip();
+        Weapons.Add(newWeapon);
+        if(Equip)
+        {
+            EquipWeapon(Weapons.Count-1);
         }
     }
 
@@ -69,13 +81,9 @@ public class Player : Character
 
     void InitializeWeapons()
     {
-        Weapons = new List<Weapon>();
         foreach (Weapon weapon in StartWeaponPrefabs)
         {
-            Weapon newWeapon = Instantiate(weapon, GunSocket);
-            newWeapon.Owner = gameObject;
-            newWeapon.UnEquip();
-            Weapons.Add(newWeapon);
+            AquireNewWeapon(weapon);
         }
         EquipWeapon(0);
     }
