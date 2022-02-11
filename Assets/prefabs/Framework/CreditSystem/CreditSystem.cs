@@ -17,7 +17,7 @@ public class CreditSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        onCreditChanged.Invoke(currentCredit, 0);
+        
     }
      public void ChangeCredit(float changeAmount)
     {

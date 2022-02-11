@@ -52,11 +52,30 @@ public class ShopSystem : ScriptableObject
         {
             return false;
         }
-        if(cost > creditSystem.GetCurrentCredit())
+        if(cost > creditSystem.GetCurrentCredit()) 
         {
             return false;
         }
         return true;
+    }
+
+    public bool PlayerOwnsItem(ShopItem item)
+    {
+        Player player = FindObjectOfType<Player>();
+        foreach(Weapon weapon in player.GetOwnedWeapons())
+        {
+            if(weapon.GetWeaponInfo().name == item.weaponInfo.name)
+            {
+                Debug.Log("Player has weapon");
+                return true;
+            }
+            else
+            {
+                Debug.Log("player does not have it");
+                return false;
+            }
+        }
+        return false;
     }
 
     bool HasCreditSystem()

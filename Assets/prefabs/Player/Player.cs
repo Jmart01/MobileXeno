@@ -26,13 +26,17 @@ public class Player : Character
 
     AbilityComponent abilityComp;
     AbilityWheel abilityWheel;
-    CreditSystem creditSystem;
+
+    public Weapon[] GetOwnedWeapons()
+    {
+        return Weapons.ToArray();
+    }
+
 
     private void Awake()
     {
         inputActions = new InputActions();
         abilityComp = GetComponent<AbilityComponent>();
-        creditSystem = GetComponent<CreditSystem>();
         abilityWheel = FindObjectOfType<AbilityWheel>();
         if(abilityComp != null)
         {

@@ -31,7 +31,12 @@ public class ShopItem : MonoBehaviour
         }
         else
         {
+            
             gameObject.GetComponent<Button>().enabled = false; 
+        }
+        if(_shopSystem.PlayerOwnsItem(this))
+        {
+            gameObject.GetComponent<Button>().enabled = false;
         }
     }
 
