@@ -62,8 +62,8 @@ public class AbilityComponent : MonoBehaviour
         StaminaLevel = Mathf.Clamp(StaminaLevel, MaxStaminaLevel, StaminaLevel);
     }
 
-    internal int GetStaminaLevel()
+    internal float GetStaminaLevel()
     {
-        return (int)StaminaLevel;
+        return StaminaLevel;
     }
 }

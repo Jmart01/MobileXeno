@@ -314,7 +314,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1160592803492926727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,3 +350,4 @@ MonoBehaviour:
   ExpandedScale: 2
   HighLighetedScale: 2.2
   ScaleSpeed: 20
+  inGameUi: {fileID: 0}

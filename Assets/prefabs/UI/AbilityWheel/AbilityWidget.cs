@@ -22,6 +22,7 @@ public class AbilityWidget : MonoBehaviour
     Material CooldownMat;
     Material StaminaMat;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,12 +46,18 @@ public class AbilityWidget : MonoBehaviour
 
     public void SetStaminaProgress(float progress)
     {
-        StaminaMat.SetFloat("_Progress", progress);
+        if(StaminaMat != null)
+        {
+            StaminaMat.SetFloat("_Progress", progress);
+        }
     }
 
     void SetCooldownProgress(float progress)
     {
-        CooldownMat.SetFloat("_Progress", progress);
+        if(CooldownMat != null)
+        {
+            CooldownMat.SetFloat("_Progress", progress);
+        }  
     }
 
     internal void SetExpand(bool isExpanded)

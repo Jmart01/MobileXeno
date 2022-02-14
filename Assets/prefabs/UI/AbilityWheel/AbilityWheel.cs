@@ -60,7 +60,10 @@ public class AbilityWheel : MonoBehaviour, IDragHandler, IPointerDownHandler, IP
                 
                 abilityWidgets[i].SetStaminaProgress(newValue);
                 newValue = 0;
-                break;
+            }
+            else
+            {
+                abilityWidgets[i].SetStaminaProgress(0.0f);
             }
         }
         

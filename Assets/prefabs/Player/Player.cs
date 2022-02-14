@@ -279,4 +279,78 @@ public class Player : Character
         PlayerAlive = false;
         OnDisable();
     }
+    public void UpdateFromSaveData(PlayerSaveData data)
+    {
+        GetComponent<CharacterController>().enabled = false;
+        transform.position = data.Loc;
+        GetComponent<CharacterController>().enabled = true;
+
+        HealthComponent healthComp = GetComponent<HealthComponent>();
+        healthComp.ChangeHealth(data.Health - healthComp.GetHealth());
+
+        abilityComp.ChangeStamina(data.Stamina - abilityComp.GetStaminaLevel());
+
+        CreditSystem creditSystem = GetComponent<CreditSystem>();
+        creditSystem.ChangeCredit(data.Credits - creditSystem.GetCurrentCredit());
+
+        //updates the weapons
+        var shops = Resources.FindObjectsOfTypeAll<ShopSystem>();
+        if(shops.Length >0)
+        {
+            ShopSystem shop = (ShopSystem)(shops[0]);
+            Weapon[] allWeapons = shop.GetWeaponsOnSale();
+            List<string> weaponInData = new List<string>(data.Weapons);
+            foreach(Weapon weapon in allWeapons)
+            {
+                bool HadWeapon = weaponInData.Contains(weapon.GetWeaponInfo().name);
+                bool AlreadyHave = false;
+                foreach(Weapon weaponAlreadyHave in StartWeaponPrefabs)
+                {
+                    if(weaponAlreadyHave.GetWeaponInfo().name == weapon.GetWeaponInfo().name)
+                    {
+                        AlreadyHave = true;
+                    }
+                }
+                if(HadWeapon && !AlreadyHave)
+                {
+                    AquireNewWeapon(weapon);
+                }
+            }
+        }
+        
+    }
+    public PlayerSaveData GenerateSaveData()
+    {
+        List<string> weaponsNames = new List<string>();
+        foreach(Weapon weapon in Weapons)
+        {
+            weaponsNames.Add(weapon.GetWeaponInfo().name);
+        }
+
+        return new PlayerSaveData(transform.position,
+            GetComponent<CreditSystem>().GetCurrentCredit(),
+            GetComponent<HealthComponent>().GetHealth(),
+            GetComponent<AbilityComponent>().GetStaminaLevel(),
+            weaponsNames.ToArray()
+            );
+    }
+}
+
+
+[Serializable]
+public struct PlayerSaveData
+{
+    public PlayerSaveData(Vector3 playerLoc, float playerCredits, float playerHealth, float playerStamina, string[] weapons)
+    {
+        Loc = playerLoc;
+        Credits = playerCredits;
+        Health = playerHealth;
+        Stamina = playerStamina;
+        Weapons = weapons;
+    }
+    public Vector3 Loc;
+    public float Credits;
+    public float Health;
+    public float Stamina;
+    public string[] Weapons;
 }

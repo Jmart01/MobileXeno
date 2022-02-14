@@ -13,6 +13,12 @@ public class HealthComponent : MonoBehaviour
     public OnHealthChanged onHealthChanged;
     public OnNoHealthLeft noHealthLeft;
 
+    public float GetHealth()
+    {
+        return HitPoints;
+    }
+
+
     public void ChangeHealth(float changeAmount, GameObject Causer = null)
     {
         if(changeAmount < 0 && HitPoints == 0)
