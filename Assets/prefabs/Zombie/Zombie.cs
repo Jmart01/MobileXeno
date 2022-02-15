@@ -67,4 +67,36 @@ public class Zombie : Character
             }
         }
     }
+
+    public void UpdateFromEnemySaveData(EnemySaveData data)
+    {
+        GetComponent<CharacterController>().enabled = false;
+        transform.position = data.Location;
+        GetComponent<CharacterController>().enabled = true;
+
+        HealthComponent healthComp = GetComponent<HealthComponent>();
+        healthComp.ChangeHealth(data.Health - healthComp.GetHealth());
+    }
+
+    public EnemySaveData GenerateEnemySaveData()
+    {
+        return new EnemySaveData(transform.position,
+            GetComponent<HealthComponent>().GetHealth(),
+            gameObject.name);
+    }
+}
+
+[Serializable]
+public struct EnemySaveData
+{
+    public EnemySaveData(Vector3 enemyLoc, float enemyHealth, string enemyName)
+    {
+        Location = enemyLoc;
+        Health = enemyHealth;
+        Name = enemyName;
+    }
+
+    public Vector3 Location;
+    public float Health;
+    public string Name;
 }
