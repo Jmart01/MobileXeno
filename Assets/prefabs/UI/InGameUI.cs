@@ -19,6 +19,7 @@ public class InGameUI : MonoBehaviour
     }
     public void SwichToInGameMenu()
     {
+        Time.timeScale = 1f;
         InGameMenu.SetActive(true);
         PauseMenu.SetActive(false);
     }
@@ -43,6 +44,7 @@ public class InGameUI : MonoBehaviour
 
     public void SWitchToPauseMenu()
     {
+        Time.timeScale = 0f;
         PauseMenu.SetActive(true);
         InGameMenu.SetActive(false);
        
@@ -79,5 +81,10 @@ public class InGameUI : MonoBehaviour
     public void SwichedWeaponTo(Weapon EquipedWeapon)
     {
         WeaponIcon.sprite = EquipedWeapon.GetWeaponIcon();
+    }
+
+    public void RestartLevel()
+    {
+        GameplayStatic.StartNewGame();
     }
 }

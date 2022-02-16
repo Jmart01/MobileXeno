@@ -99,6 +99,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 460e03f4c627f28439ac885c73c0ae0e, type: 3}
     - target: {fileID: -4503590311711321987, guid: cdb2fbd235f8fa74fb6df3ca4afaaea2, type: 3}
+      propertyPath: weaponSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 911a3628edc218545bb0fa55994df9b0, type: 3}
+    - target: {fileID: -4503590311711321987, guid: cdb2fbd235f8fa74fb6df3ca4afaaea2, type: 3}
       propertyPath: ShootingSpeed
       value: 25
       objectReference: {fileID: 0}
@@ -106,6 +110,10 @@ PrefabInstance:
       propertyPath: DamagePerBullet
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1394640973639225641, guid: cdb2fbd235f8fa74fb6df3ca4afaaea2, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 911a3628edc218545bb0fa55994df9b0, type: 3}
     - target: {fileID: 2274000745433085038, guid: cdb2fbd235f8fa74fb6df3ca4afaaea2, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.564

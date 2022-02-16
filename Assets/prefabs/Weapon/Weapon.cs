@@ -21,7 +21,6 @@ public class Weapon : MonoBehaviour
     [SerializeField] string WeaponName;
     [SerializeField] float cost;
 
-
     public WeaponInfo GetWeaponInfo()
     {
         return new WeaponInfo()
@@ -69,6 +68,8 @@ public class Weapon : MonoBehaviour
     {
         if(BulletEmitter)
         {
+            GetComponent<AudioSource>().Play();
+
             BulletEmitter.Emit(BulletEmitter.emission.GetBurst(0).maxCount);
         }
     }
