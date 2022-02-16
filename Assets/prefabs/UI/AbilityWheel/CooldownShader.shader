@@ -38,8 +38,8 @@ Shader "Unlit/CooldownShader"
             };
 
             float4 _Color;
-            float1 _Thickness;
-            float1 _Progress;
+            float _Thickness;
+            float _Progress;
             
 
             v2f vert (appdata v)
@@ -60,7 +60,7 @@ Shader "Unlit/CooldownShader"
                     color = float4(0, 0, 0, 0);
                 }
                 float2 dir = normalize(coord);
-                float1 angle = degrees(acos(dot(dir, float2(0, -1))))/360;
+                float angle = degrees(acos(dot(dir, float2(0, -1))))/360;
                 if (coord.x > 0)
                 {
                     angle = 0.5 + degrees(acos(dot(dir, float2(0, 1)))) / 360;

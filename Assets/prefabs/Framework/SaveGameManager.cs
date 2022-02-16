@@ -41,7 +41,10 @@ public static class SaveGameManager
     static public void LoadGame()
     {
        
-
+        if(!File.Exists(SaveDir))
+        {
+            return;
+        }
         string saveDataString = File.ReadAllText(SaveDir);
         currentSaveData = JsonUtility.FromJson<SaveGameData>(saveDataString);
         SceneManager.LoadScene(currentSaveData.LevelIndex);

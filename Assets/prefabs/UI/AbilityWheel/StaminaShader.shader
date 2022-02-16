@@ -36,7 +36,6 @@ Shader "Unlit/StaminaShader"
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                float2 uvOrg : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
             };
@@ -54,7 +53,6 @@ Shader "Unlit/StaminaShader"
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.uvOrg = v.uv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -67,7 +65,7 @@ Shader "Unlit/StaminaShader"
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 //this gets the coordinate uvs and shifts them over to the left 1 and down .5
-                float2 coord = i.uvOrg - float2(1,0.5);
+                float2 coord = i.uv- float2(1,0.5);
 
                 //makes the coordinates "face" the same way
                 float2 dir = normalize(coord);

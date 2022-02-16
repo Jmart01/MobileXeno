@@ -70,9 +70,7 @@ public class Zombie : Character
 
     public void UpdateFromEnemySaveData(EnemySaveData data)
     {
-        GetComponent<CharacterController>().enabled = false;
         transform.position = data.Location;
-        GetComponent<CharacterController>().enabled = true;
 
         HealthComponent healthComp = GetComponent<HealthComponent>();
         healthComp.ChangeHealth(data.Health - healthComp.GetHealth());
