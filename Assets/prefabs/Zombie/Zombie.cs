@@ -48,6 +48,11 @@ public class Zombie : Character
         animator.SetFloat("Speed", speed);
     }
 
+    public void ChangeReward(float multiplier)
+    {
+        CreditReward = CreditReward * multiplier;
+    }
+
     public override void NoHealthLeft(GameObject killer)
     {
         base.NoHealthLeft();

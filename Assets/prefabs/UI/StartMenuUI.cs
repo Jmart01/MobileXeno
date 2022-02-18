@@ -21,4 +21,9 @@ public static class GameplayStatic
     {
         Application.Quit();
     }
+
+    public static void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

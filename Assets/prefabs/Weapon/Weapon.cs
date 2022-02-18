@@ -37,6 +37,17 @@ public class Weapon : MonoBehaviour
     public float GetDamagePerBullet() { return DamagePerBullet; }
     public GameObject Owner { set; get; }
 
+
+    public void SetInstaKill(float instaKillModifier)
+    {
+        DamagePerBullet += instaKillModifier;
+    }
+
+    public void UndoInstaKill(float instaKillModifier)
+    {
+        DamagePerBullet -= instaKillModifier;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

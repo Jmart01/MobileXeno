@@ -77,6 +77,10 @@ public class InGameUI : MonoBehaviour
     {
         
     }
+    public void QuitGameBtnPressed()
+    {
+        GameplayStatic.QuitGame();
+    }
 
     public void SwichedWeaponTo(Weapon EquipedWeapon)
     {
@@ -86,5 +90,10 @@ public class InGameUI : MonoBehaviour
     public void RestartLevel()
     {
         GameplayStatic.StartNewGame();
+    }
+
+    public void BackToMainMenu()
+    {
+        GameplayStatic.LoadMainMenu();
     }
 }

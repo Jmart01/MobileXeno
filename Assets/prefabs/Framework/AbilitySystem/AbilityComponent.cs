@@ -21,8 +21,10 @@ public class AbilityComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(abilities.Length);
         for(int i = 0; i < abilities.Length; i++)
         {
+            Debug.Log(abilities[i].name);
             abilities[i] = Instantiate(abilities[i]);
             abilities[i].Init(this);
             onNewAbilityInitialized?.Invoke(abilities[i]);
@@ -56,6 +58,7 @@ public class AbilityComponent : MonoBehaviour
         while(StaminaLevel > 0)
         {
             StaminaLevel -= StaminaDropSpeed * Time.deltaTime;
+            StaminaLevel = Mathf.Clamp(StaminaLevel, 0, MaxStaminaLevel);
             onStaminaUpdated?.Invoke(StaminaLevel);
             yield return new WaitForEndOfFrame();
         }
