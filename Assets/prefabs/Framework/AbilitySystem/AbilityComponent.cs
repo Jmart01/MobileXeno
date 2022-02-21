@@ -57,8 +57,7 @@ public class AbilityComponent : MonoBehaviour
         yield return new WaitForSeconds(StaminaDrainingStartDelay);
         while(StaminaLevel > 0)
         {
-            StaminaLevel -= StaminaDropSpeed * Time.deltaTime;
-            StaminaLevel = Mathf.Clamp(StaminaLevel, 0, MaxStaminaLevel);
+            StaminaLevel -= Mathf.Clamp(StaminaDropSpeed * Time.deltaTime, 0, MaxStaminaLevel);
             onStaminaUpdated?.Invoke(StaminaLevel);
             yield return new WaitForEndOfFrame();
         }

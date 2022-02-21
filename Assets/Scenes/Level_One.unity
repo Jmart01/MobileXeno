@@ -31256,6 +31256,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8548831148163436803, guid: 6e76b1de55c00f0419f1af4472d5f874, type: 3}
+      propertyPath: CreditReward
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -8548831148163436803, guid: 6e76b1de55c00f0419f1af4472d5f874, type: 3}
       propertyPath: StaminaReward
       value: 1
       objectReference: {fileID: 0}
@@ -31999,6 +32003,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8548831148163436803, guid: 6e76b1de55c00f0419f1af4472d5f874, type: 3}
+      propertyPath: CreditReward
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: -8548831148163436803, guid: 6e76b1de55c00f0419f1af4472d5f874, type: 3}
       propertyPath: StaminaReward
       value: 1
@@ -41781,6 +41789,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6070190318717831759, guid: dd0ebfc2a74db4e4fbe3f78cc4826666, type: 3}
+      propertyPath: CreditReward
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: -5331672675125199819, guid: dd0ebfc2a74db4e4fbe3f78cc4826666, type: 3}
       propertyPath: PatrollingPoint.Array.size
       value: 3
